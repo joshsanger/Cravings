@@ -9,10 +9,43 @@
  * XX. ASSIGN FUNCTIONS
  */
 
+var ajaxPath;
+
 /**
- * 01. GLOBAL VARIABLES
- * Variables used throughout the application
+ * 02. GET URL DETAILS
+ * Gets the details for the url
  */
+function getUrlDetails() {
+
+    var theURL   = $(this).val().trim();
+    var formData = {};
+
+
+    if (theURL.length) {
+
+        formData.url = theURL;
+
+        $.ajax({
+            type      : "POST",
+            url       : ajaxPath + 'get_url_details.php',
+            data      : formData,
+            dataType  : "json",
+            beforeSend: function() {
+
+            },
+            success   : function(response) {
+
+                console.log(response);
+
+                if (!response.error) {
+
+                } else {
+
+                }
+            }
+        });
+    }
+}
 
 
 $(window).load(function(){
@@ -28,5 +61,6 @@ $(document).ready(function(){
      * XX. ASSIGN FUNCTIONS
      * Assigns the functions to run the page once the document has loaded
      */
-
+    ajaxPath = $('#path').val();
+    $('#url-input').on('paste, input', getUrlDetails);
 });
