@@ -17,7 +17,7 @@ var ajaxPath;
  */
 function getUrlDetails() {
 
-    var theURL   = $(this).val().trim();
+    var theURL   = $('#url-input').val().trim();
     var formData = {};
 
 
@@ -62,5 +62,5 @@ $(document).ready(function(){
      * Assigns the functions to run the page once the document has loaded
      */
     ajaxPath = $('#path').val();
-    $('#url-input').on('paste, input', getUrlDetails);
+    $('#add-url').on('click', getUrlDetails);
 });

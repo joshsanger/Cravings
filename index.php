@@ -4,7 +4,8 @@
     require_once('./_includes/header.php');
 ?>
 
-    <input type="text" id="url-input" placeholder="Enter / Paste URL"/>
+    <input type="text" id="url-input" placeholder="Enter or paste the URL"/>
+    <button id="add-url">Go</button>
     <input type="hidden" value="<?php echo BASE_URL;?>/ajax/" id="path">
 
 <?php
