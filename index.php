@@ -46,11 +46,11 @@
             while ($row = mysqli_fetch_row($result)) {?>
             <a href="<?php echo $row[1];?>" class="item" target="_blank">
                 <div class="image">
-                    <img src="<?php echo $row[4];?>"/>
+                    <img src="<?php echo (empty($row[4]) ? 'https://static.comicvine.com/uploads/original/11116/111163466/4571231-2792561597-Cooki.png' : $row[4]);?>"/>
                 </div>
                 <div class="text">
                     <h2><?php echo $row[2];?></h2>
-                    <p><?php echo $row[3];?></p>
+                    <p><?php echo (empty($row[3]) ? 'No description available' : $row[3]);?></p>
                 </div>
                 <div class="controls">
                     <span class="remove">Remove <i class="material-icons">&#xE872;</i></span>
