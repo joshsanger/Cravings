@@ -22,12 +22,21 @@
 
     }
 ?>
+<section id="top">
+    <div class="container">
+        <h1>What are you craving Rebecca?</h1>
+        <div id="input-wrap">
+            <div>
+                <input type="text" id="url-input" placeholder="Enter or paste the URL"/>
+            </div>
+            <button id="add-url"><i class="material-icons">&#xE145;</i> <span>Add</span></button>
+        </div>
+    </div>
+</section>
 
-<input type="text" id="url-input" placeholder="Enter or paste the URL"/>
-<button id="add-url">Go</button>
 
 
-<div id="items-wrap">
+<section id="items-wrap">
 
     <?php
 
@@ -59,7 +68,7 @@
     ?>
 
 
-</div>
+</section>
 <input type="hidden" value="<?php echo BASE_URL;?>/ajax/" id="path">
 <input type="hidden" value="<?php echo BASE_URL;?>/assets/" id="assets">
 
