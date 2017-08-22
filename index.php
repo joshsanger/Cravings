@@ -35,7 +35,7 @@
 
             /* fetch associative array */
             while ($row = mysqli_fetch_row($result)) {?>
-            <a href="<?php echo $row[1];?>" class="item">
+            <a href="<?php echo $row[1];?>" class="item" target="_blank">
                 <div class="image">
                     <img src="<?php echo $row[4];?>"/>
                 </div>

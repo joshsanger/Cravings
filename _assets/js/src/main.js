@@ -75,7 +75,7 @@ function buildItemMarkup(theObj) {
         theObj.image = 'https://static.comicvine.com/uploads/original/11116/111163466/4571231-2792561597-Cooki.png';
     }
 
-    theMarkup  = '<a href="' + theObj.url + '" class="item">';
+    theMarkup  = '<a href="' + theObj.url + '" class="item" target="_blank">';
     theMarkup +=    '<div class="image">';
     theMarkup +=        '<img src="' + theObj.image + '"/>';
     theMarkup +=    '</div>';
