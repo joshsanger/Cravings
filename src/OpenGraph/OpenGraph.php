@@ -122,14 +122,14 @@ class OpenGraph{
 
 				$elements = $doc->getElementsByTagName("img");
 				foreach ( $elements as $tag ){
-					if ($tag->hasAttribute('width') && ( ($tag->getAttribute('width') > 200) || ($tag->getAttribute('width') == '100%') ) ) {
+					if ($tag->hasAttribute('width') && ( ($tag->getAttribute('width') > 300) || ($tag->getAttribute('width') == '100%') ) ) {
                         $page->_values['image'] = $tag->getAttribute('src');
                         break;
                     } else if (filter_var($tag->getAttribute('src'), FILTER_VALIDATE_URL)) {
 
                         list($width) = getimagesize($tag->getAttribute('src'));
 
-                        if ($width && $width > 200) {
+                        if ($width && $width > 300) {
                             $page->_values['image'] = $tag->getAttribute('src');
                             break;
                         }

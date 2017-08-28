@@ -75,18 +75,18 @@ function buildItemMarkup(theObj) {
         theObj.image = 'https://static.comicvine.com/uploads/original/11116/111163466/4571231-2792561597-Cooki.png';
     }
 
-    theMarkup  = '<a href="' + theObj.url + '" class="item" target="_blank">';
-    theMarkup +=    '<div class="image">';
+    theMarkup  = '<div class="item">';
+    theMarkup +=    '<a href="' + theObj.url + '" target="_blank" class="image">';
     theMarkup +=        '<img src="' + theObj.image + '"/>';
-    theMarkup +=    '</div>';
+    theMarkup +=    '</a>';
     theMarkup +=    '<div class="text">';
-    theMarkup +=        '<h2>' + theObj.title + '</h2>';
+    theMarkup +=        '<h2><a href="' + theObj.url + '" target="_blank">' + theObj.title + '</a></h2>';
     theMarkup +=        '<p>' + theObj.description + '</p>';
     theMarkup +=    '</div>';
     theMarkup +=    '<div class="controls">';
-    theMarkup +=        '<span class="remove">Remove <i class="material-icons">&#xE872;</i></span>';
+    theMarkup +=        '<span class="remove"><i class="material-icons">&#xE872;</i> Remove</span>';
     theMarkup +=    '</div>';
-    theMarkup += '</a>';
+    theMarkup += '</div>';
 
     return theMarkup;
 }
