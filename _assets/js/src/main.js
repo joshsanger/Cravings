@@ -65,6 +65,7 @@ function getUrlDetails() {
 function buildItemMarkup(theObj) {
 
     var theMarkup = '';
+    var hasImage = true;
 
     if (!theObj.hasOwnProperty('description') || theObj.description == '') {
         theObj.description = 'No description available';
@@ -72,12 +73,14 @@ function buildItemMarkup(theObj) {
 
     if (!theObj.hasOwnProperty('image') || theObj.image == '') {
         // theObj.image = $('#assets').val() + 'images/default.png';
-        theObj.image = 'https://static.comicvine.com/uploads/original/11116/111163466/4571231-2792561597-Cooki.png';
+        theObj.image = '';
+        hasImage = false;
+
     }
 
     theMarkup  = '<div class="item">';
-    theMarkup +=    '<a href="' + theObj.url + '" target="_blank" class="image">';
-    theMarkup +=        '<img src="' + theObj.image + '"/>';
+    theMarkup +=    '<a href="' + theObj.url + '" target="_blank" class="image ' + (!hasImage ? 'no-image' : '') + '">';
+    theMarkup +=        (hasImage ? '<img src="' + theObj.image + '"/>' : '');
     theMarkup +=    '</a>';
     theMarkup +=    '<div class="text">';
     theMarkup +=        '<h2><a href="' + theObj.url + '" target="_blank">' + theObj.title + '</a></h2>';

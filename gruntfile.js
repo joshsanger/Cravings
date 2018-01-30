@@ -10,7 +10,10 @@ module.exports = function(grunt) {
             },
             build: {
                 src: [
-                    '_assets/js/src/*.js'
+                    'development/js/lib/jquery.min.js',
+                    'development/js/src/*.js',
+                    '!development/js/src/*.es6.js',
+                    'development/js/es6-compiled.js'
                 ],
                 dest: '_assets/js/main.min.js'
             }

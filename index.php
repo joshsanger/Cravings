@@ -24,7 +24,7 @@
 ?>
 <section id="top">
     <div class="container">
-        <h1>What are you craving Rebecca?</h1>
+        <h1>What are you craving, Rebecca?</h1>
         <div id="input-wrap">
             <div>
                 <input type="text" id="url-input" placeholder="Enter or paste the URL"/>
@@ -45,8 +45,9 @@
             /* fetch associative array */
             while ($row = mysqli_fetch_row($result)) {?>
             <div class="item">
-                <a href="<?php echo $row[1];?>" target="_blank" class="image">
-                    <img src="<?php echo (empty($row[4]) ? 'https://static.comicvine.com/uploads/original/11116/111163466/4571231-2792561597-Cooki.png' : $row[4]);?>"/>
+                <a href="<?php echo $row[1];?>" target="_blank" class="image <?php echo (empty($row[4]) ? 'no-image' : ''); ?>">
+                    <?php echo (!empty($row[4]) ? '<img src="'.$row[4].'"/>' : '');?>
+
                 </a>
                 <div class="text">
                     <h2><a href="<?php echo $row[1];?>" target="_blank"><?php echo $row[2];?></a></h2>

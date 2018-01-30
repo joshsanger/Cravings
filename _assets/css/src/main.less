@@ -14,6 +14,15 @@
         display: inline-block;
         column-break-inside: avoid;
         color: @greyDark;
+        & .image {
+            &.no-image {
+                //background: #2e2f33 url(../images/no-image.svg) no-repeat center center;
+                background: #505861 url(../images/no-image.svg) no-repeat center center;
+                background-size: 30%;
+                height: 200px;
+            }
+
+        }
         & a {
             text-decoration: none;
             color: @greyDark;
@@ -82,6 +91,8 @@
         -webkit-appearance: none;
         padding: 15px;
         width: 100%;
+        outline: none;
+        border-radius: 0;
         &:focus {
             box-shadow: none;
             border-color: @purple;
@@ -113,7 +124,7 @@
 }
 #top {
     background: @greyDark url(../images/banner.jpg) no-repeat center center /cover;
-    padding: 100px 0;
+    padding: 150px 0;
     & h1 {
         margin-bottom: 10px;
         color: @white;
