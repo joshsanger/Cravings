@@ -42,10 +42,12 @@ export default class Cravings {
                 beforeSend: () => {
                     // TODO: show loading icon
                     // TODO: Hide error if it exists
+                    $('.spinner, .spinner-overlay').fadeIn(400);
                 },
                 success   : (response) => {
 
                     console.log(response);
+                    $('.spinner, .spinner-overlay').fadeOut(400);
 
                     if (!response.error) {
 
@@ -75,11 +77,11 @@ export default class Cravings {
         let theMarkup = '';
         let hasImage = true;
 
-        if (!theObj.hasOwnProperty('description') || theObj.description == '') {
+        if (!theObj.hasOwnProperty('description') || !theObj.description) {
             theObj.description = `No description available, but I bet it's delicious!`;
         }
 
-        if (!theObj.hasOwnProperty('image') || theObj.image == '') {
+        if (!theObj.hasOwnProperty('image') || !theObj.image) {
 
             theObj.image = '';
             hasImage = false;
