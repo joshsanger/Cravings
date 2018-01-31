@@ -5,5 +5,9 @@
             <div class="double-bounce1"></div>
             <div class="double-bounce2"></div>
         </div>
+        <div class="main-error">
+            <i class="material-icons">&#xE001;</i>
+            <p>Oops. Something went wrong.</p>
+        </div> <!-- /error -->
     </body>
 </html>

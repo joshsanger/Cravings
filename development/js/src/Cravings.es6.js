@@ -16,7 +16,9 @@ export default class Cravings {
 
     constructor() {
 
-        this.ajaxPath = $('#path').val();
+        this.ajaxPath      = $('#path').val();
+        this.mainError     = $('.main-error');
+        this.errorInterval = '';
 
     }
 
@@ -43,6 +45,8 @@ export default class Cravings {
                     // TODO: show loading icon
                     // TODO: Hide error if it exists
                     $('.spinner, .spinner-overlay').fadeIn(400);
+                    clearInterval(this.errorInterval);
+                    this.mainError.removeClass('show');
                 },
                 success   : (response) => {
 
@@ -55,13 +59,14 @@ export default class Cravings {
                         theInput.val('').trigger('input');
                         $('#items-wrap').prepend(this.buildItemMarkup(response));
                     } else {
-                        // TODO: show error
+                        this.mainError.find('p').text(response.error);
+                        this.mainError.addClass('show');
+                        this.errorInterval = setInterval(this.hideError.bind(this), 4000);
                     }
                 }
             });
         }
     }
-
 
 
     /**
@@ -103,5 +108,16 @@ export default class Cravings {
         `);
 
         return theMarkup;
+    }
+
+
+    /**
+     * 01.03. HIDE ERROR
+     * Hides the error
+     */
+    hideError() {
+
+        this.mainError.removeClass('show');
+        clearInterval(this.errorInterval);
     }
 }

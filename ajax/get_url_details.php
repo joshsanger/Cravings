@@ -50,6 +50,7 @@ try {
     }
 } catch (Exception $e){
     $response['error'] = $e->getMessage();
+    usleep(500000);
 
 } catch (\Exception $e) {
     $db->rollbackTransaction();
