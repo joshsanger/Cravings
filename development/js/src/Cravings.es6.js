@@ -51,7 +51,7 @@ export default class Cravings {
 
                         response.url = theURL;
                         theInput.val('').trigger('input');
-                        $('#items-wrap').prepend(buildItemMarkup(response));
+                        $('#items-wrap').prepend(this.buildItemMarkup(response));
                     } else {
                         // TODO: show error
                     }
@@ -86,21 +86,19 @@ export default class Cravings {
         }
 
         theMarkup = (`
-        
+            <div class="item">
+                <a href="${theObj.url}" target="_blank" class="image ${(!hasImage ? 'no-image' : '')}">
+                    ${(hasImage ? `<img src="${theObj.image}"/>` : '')}
+                </a>
+                <div class="text">
+                    <h2><a href="${theObj.url}" target="_blank">${theObj.title}</a></h2>
+                    <p>${theObj.description}</p>
+                </div>
+                <div class="controls">
+                    <span class="remove"><i class="material-icons">&#xE872;</i> Remove</span>
+                </div>
+            </div>            
         `);
-
-        theMarkup  = '<div class="item">';
-        theMarkup +=    '<a href="' + theObj.url + '" target="_blank" class="image ' + (!hasImage ? 'no-image' : '') + '">';
-        theMarkup +=        (hasImage ? '<img src="' + theObj.image + '"/>' : '');
-        theMarkup +=    '</a>';
-        theMarkup +=    '<div class="text">';
-        theMarkup +=        '<h2><a href="' + theObj.url + '" target="_blank">' + theObj.title + '</a></h2>';
-        theMarkup +=        '<p>' + theObj.description + '</p>';
-        theMarkup +=    '</div>';
-        theMarkup +=    '<div class="controls">';
-        theMarkup +=        '<span class="remove"><i class="material-icons">&#xE872;</i> Remove</span>';
-        theMarkup +=    '</div>';
-        theMarkup += '</div>';
 
         return theMarkup;
     }

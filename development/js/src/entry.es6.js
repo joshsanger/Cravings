@@ -30,4 +30,13 @@ $(document).ready(function() {
      */
 
     const cravings = new Cravings();
+
+    $('#url-input').on('keydown', function(e) {
+        if (e.keyCode === 13 && $('#url-input').val().trim().length) {
+            $('#add-url').trigger('click');
+        }
+    })
+    $('#add-url').on('click', function() {
+        cravings.getUrlDetails($('#url-input'));
+    });
 });
