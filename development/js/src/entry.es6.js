@@ -39,4 +39,8 @@ $(document).ready(function() {
     $('#add-url').on('click', function() {
         cravings.getUrlDetails($('#url-input'));
     });
+
+    $('body').on('onerror', 'image', function() {
+        console.log('hi');
+    });
 });

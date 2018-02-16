@@ -83,7 +83,7 @@ export default class Cravings {
         let hasImage = true;
 
         if (!theObj.hasOwnProperty('description') || !theObj.description) {
-            theObj.description = `No description available, but I bet it's delicious!`;
+            theObj.description = `No description available, but I bet it's delicious! You should definitely post more yummy things!`;
         }
 
         if (!theObj.hasOwnProperty('image') || !theObj.image) {
@@ -98,7 +98,7 @@ export default class Cravings {
                     ${(hasImage ? `<img src="${theObj.image}"/>` : '')}
                 </a>
                 <div class="text">
-                    <h2><a href="${theObj.url}" target="_blank">${theObj.title}</a></h2>
+                    <h2><a href="${theObj.url}" target="_blank">${(theObj.title || 'Something delicious')}</a></h2>
                     <p>${theObj.description}</p>
                 </div>
                 <div class="controls">

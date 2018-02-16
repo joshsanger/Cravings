@@ -51,7 +51,7 @@
                 </a>
                 <div class="text">
                     <h2><a href="<?php echo $row[1];?>" target="_blank"><?php echo $row[2];?></a></h2>
-                    <p><?php echo (empty($row[3]) ? 'No description available, but I bet it\'s delicious!' : $row[3]);?></p>
+                    <p><?php echo (empty($row[3]) ? 'No description available, but I bet it\'s delicious! You should definitely post more yummy things!' : $row[3]);?></p>
                 </div>
                 <div class="controls">
                     <span class="remove"><i class="material-icons">&#xE872;</i> Remove</span>

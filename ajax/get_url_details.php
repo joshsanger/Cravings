@@ -31,6 +31,19 @@ try {
         $image = (!empty($graph->__get('image')) ? $graph->__get('image') : '');
 
 
+        // check if URL exists
+        $handle = curl_init($image);
+        curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+        $curlResponse = curl_exec($handle);
+        $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+
+        if ($httpCode !== 200) {
+            $image = '';
+        }
+
+        curl_close($handle);
+
+
         $query = $db->prepare(" INSERT INTO
 					 urls (url,title,description,image_url)
 				   VALUES (?,?,?,?)");
