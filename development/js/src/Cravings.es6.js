@@ -139,20 +139,17 @@ export default class Cravings {
                 this.mainError.removeClass('show');
             },
             success   : (response) => {
+
                 $('.spinner, .spinner-overlay').fadeOut(400);
+                if (!response.error) {
 
-                console.log(response);
-
-                // if (!response.error) {
-                //
-                //     response.url = theURL;
-                //     theInput.val('').trigger('input');
-                //     $('#items-wrap').prepend(this.buildItemMarkup(response));
-                // } else {
-                //     this.mainError.find('p').text(response.error);
-                //     this.mainError.addClass('show');
-                //     this.errorInterval = setInterval(this.hideError.bind(this), 4000);
-                // }
+                    $(`#item${response.id}`).remove();
+                    // TODO: check if table is empty
+                } else {
+                    this.mainError.find('p').text(response.error);
+                    this.mainError.addClass('show');
+                    this.errorInterval = setInterval(this.hideError.bind(this), 4000);
+                }
             }
         });
     }

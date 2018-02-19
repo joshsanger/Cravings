@@ -4,7 +4,6 @@ $response;
 
 include_once('../_includes/database.php');
 
-$response;
 $id = $_POST['id'] ?? '';
 
 try {
@@ -15,7 +14,7 @@ try {
         throw new Exception('Failed to connect to MySQL: ' . mysqli_connect_error());
     }
 
-    if (is_empty($id)) {
+    if (empty($id)) {
         throw new Exception('No ID passed!');
     }
 
@@ -36,11 +35,12 @@ try {
 
 } catch (Exception $e){
     $response['error'] = $e->getMessage();
-    usleep(500000);
 
 } catch (\Exception $e) {
     $db->rollbackTransaction();
 } finally {
+
+    usleep(500000);
 
     echo json_encode($response);
 }
