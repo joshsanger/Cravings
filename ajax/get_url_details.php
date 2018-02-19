@@ -5,7 +5,7 @@ include_once('../_includes/database.php');
 
 $response;
 $graph;
-$url = $_POST['url'];
+$url = $_POST['url'] ?? '';
 
 try {
 
@@ -48,14 +48,13 @@ try {
 					 urls (url,title,description,image_url)
 				   VALUES (?,?,?,?)");
         $query->bind_param('ssss', $url,$title,$description,$image);
-
-
         $query->execute();
 
         if (!$query) {
             throw new Exception('Database Error!');
         }
 
+        $response['id']          = mysqli_insert_id($db);
         $response['title']       = $title;
         $response['description'] = $description;
         $response['image']       = $image;

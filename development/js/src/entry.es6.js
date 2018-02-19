@@ -40,7 +40,9 @@ $(document).ready(function() {
         cravings.getUrlDetails($('#url-input'));
     });
 
-    $('body').on('onerror', 'image', function() {
-        console.log('hi');
-    });
+    $('body').on('click', '.remove', function() {
+        cravings.removeItem($(this).parents('.item').attr('data-id'));
+    })
+
+
 });

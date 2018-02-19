@@ -44,7 +44,7 @@
 
             /* fetch associative array */
             while ($row = mysqli_fetch_row($result)) {?>
-            <div class="item">
+            <div class="item" data-id="<?php echo $row[0];?>" id="item<?php echo $row[0];?>">
                 <a href="<?php echo $row[1];?>" target="_blank" class="image <?php echo (empty($row[4]) ? 'no-image' : ''); ?>">
                     <?php echo (!empty($row[4]) ? '<img src="'.$row[4].'"/>' : '');?>
 

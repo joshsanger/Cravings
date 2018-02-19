@@ -42,15 +42,11 @@ export default class Cravings {
                 data      : formData,
                 dataType  : "json",
                 beforeSend: () => {
-                    // TODO: show loading icon
-                    // TODO: Hide error if it exists
                     $('.spinner, .spinner-overlay').fadeIn(400);
                     clearInterval(this.errorInterval);
                     this.mainError.removeClass('show');
                 },
                 success   : (response) => {
-
-                    console.log(response);
                     $('.spinner, .spinner-overlay').fadeOut(400);
 
                     if (!response.error) {
@@ -93,7 +89,7 @@ export default class Cravings {
         }
 
         theMarkup = (`
-            <div class="item">
+            <div class="item" data-id="${theObj.id}" id="item${theObj.id}">
                 <a href="${theObj.url}" target="_blank" class="image ${(!hasImage ? 'no-image' : '')}">
                     ${(hasImage ? `<img src="${theObj.image}"/>` : '')}
                 </a>
@@ -119,5 +115,45 @@ export default class Cravings {
 
         this.mainError.removeClass('show');
         clearInterval(this.errorInterval);
+    }
+
+
+    /**
+     * 01.04.REMOVE ITEM
+     * Removes the item from the database
+     *
+     * @param       id      string      The id of the url entry
+     */
+    removeItem(id) {
+
+        var formData = {id};
+
+        $.ajax({
+            type      : "POST",
+            url       : this.ajaxPath + 'delete-entry.php',
+            data      : formData,
+            dataType  : "json",
+            beforeSend: () => {
+                $('.spinner, .spinner-overlay').fadeIn(400);
+                clearInterval(this.errorInterval);
+                this.mainError.removeClass('show');
+            },
+            success   : (response) => {
+                $('.spinner, .spinner-overlay').fadeOut(400);
+
+                console.log(response);
+
+                // if (!response.error) {
+                //
+                //     response.url = theURL;
+                //     theInput.val('').trigger('input');
+                //     $('#items-wrap').prepend(this.buildItemMarkup(response));
+                // } else {
+                //     this.mainError.find('p').text(response.error);
+                //     this.mainError.addClass('show');
+                //     this.errorInterval = setInterval(this.hideError.bind(this), 4000);
+                // }
+            }
+        });
     }
 }
