@@ -29,6 +29,8 @@ $(document).ready(function() {
      * Runs / assigns functions when the document is ready.
      */
 
+    let user = localStorage.getItem('user');
+
     const cravings = new Cravings();
 
     $('#url-input').on('keydown', function(e) {
@@ -42,7 +44,9 @@ $(document).ready(function() {
 
     $('body').on('click', '.remove', function() {
         cravings.removeItem($(this).parents('.item').attr('data-id'));
-    })
+    });
+
+
 
 
 });

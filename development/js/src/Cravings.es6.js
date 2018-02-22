@@ -11,11 +11,14 @@
 /**
  * 01. CLASS SET UP
  * Sets up the class
+ *
+ * @param       user        string      The user id based on local storage
  */
 export default class Cravings {
 
-    constructor() {
+    constructor(user = '') {
 
+        this.user          = user;
         this.ajaxPath      = $('#path').val();
         this.mainError     = $('.main-error');
         this.errorInterval = '';
