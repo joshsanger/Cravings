@@ -71,7 +71,7 @@
 </section>
 <section class="no-items hide">
     <i class="material-icons">&#xE88F;</i>
-    <p>Hm, it looks like there aren'y any cravings yet. <span class="faux-link" id="focus-on-field">Try adding some</span>!</p>
+    <p>Hm, it looks like there aren't any cravings yet. <span class="faux-link" id="focus-on-field">Try adding some</span>!</p>
 </section> <!-- /no-items -->
 <section class="fetching-items">
     <div class="spinner slow">
