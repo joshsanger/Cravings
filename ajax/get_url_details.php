@@ -6,6 +6,7 @@ include_once('../_includes/database.php');
 $response;
 $graph;
 $url = $_POST['url'] ?? '';
+$user = $_POST['user'] ? intval($_POST['user']) : '';
 
 try {
 
@@ -17,6 +18,10 @@ try {
 
     if (!filter_var($url, FILTER_VALIDATE_URL)) {
         throw new Exception('Please enter a valid URL');
+    }
+
+    if (empty($user)) {
+        throw new Exception('No user was passed');
     }
 
     $graph = OpenGraph::fetch($url);
@@ -45,9 +50,9 @@ try {
 
 
         $query = $db->prepare(" INSERT INTO
-					 urls (url,title,description,image_url)
-				   VALUES (?,?,?,?)");
-        $query->bind_param('ssss', $url,$title,$description,$image);
+					 urls (user, url,title,description,image_url)
+				   VALUES (?,?,?,?,?)");
+        $query->bind_param('sssss', $user, $url,$title,$description,$image);
         $query->execute();
 
         if (!$query) {

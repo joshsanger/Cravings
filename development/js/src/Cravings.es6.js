@@ -16,13 +16,35 @@
  */
 export default class Cravings {
 
-    constructor(user = '') {
+    constructor(user) {
 
-        this.user          = user;
         this.ajaxPath      = $('#path').val();
         this.mainError     = $('.main-error');
+        this.mainOverlay   = $('.main-overlay');
         this.errorInterval = '';
 
+        if (!!user) {
+            this.user = user;
+            this.fetchCravings = this.fetchCravings.bind(this);
+            this.fetchCravings();
+        } else {
+            $.ajax({
+                type      : "POST",
+                url       : this.ajaxPath + 'set-user-id.php',
+                data      : {},
+                dataType  : "json",
+                beforeSend: () => {
+
+                },
+                success   : (response) => {
+                    localStorage.setItem('user', response.id);
+                    this.user = response.id;
+
+
+                    this.fetchCravings();
+                }
+            });
+        }
     }
 
     /**
@@ -37,7 +59,8 @@ export default class Cravings {
 
         if (theURL.length) {
 
-            formData.url = theURL;
+            formData.url  = theURL;
+            formData.user = parseFloat(this.user);
 
             $.ajax({
                 type      : "POST",
@@ -156,4 +179,33 @@ export default class Cravings {
             }
         });
     }
+
+
+    /**
+     * 01.05. FETCH CRAVINGS
+     * Fetches the cravings for the user
+     */
+    fetchCravings() {
+
+        var formData = {user: this.user};
+
+        $.ajax({
+            type      : "POST",
+            url       : this.ajaxPath + 'fetch-cravings.php',
+            data      : formData,
+            dataType  : "json",
+            beforeSend: () => {
+
+            },
+            success   : (response) => {
+                $('.fetching-items').addClass('hide');
+                this.mainOverlay.hide();
+                console.log(response);
+
+                // check if there are entries
+            }
+        });
+    }
+
+
 }
