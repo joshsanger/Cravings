@@ -68,8 +68,18 @@
         mysqli_close($db);
     ?>
 
-
 </section>
+<section class="no-items hide">
+    <i class="material-icons">&#xE88F;</i>
+    <p>Hm, it looks like there aren'y any cravings yet. <span class="faux-link" id="focus-on-field">Try adding some</span>!</p>
+</section> <!-- /no-items -->
+<section class="fetching-items">
+    <div class="spinner slow">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+    <p>Hang on a quick sec, collecting your cravings. Thank you for your patience.</p>
+</section> <!-- /no-items -->
 <input type="hidden" value="<?php echo BASE_URL;?>/ajax/" id="path">
 <input type="hidden" value="<?php echo BASE_URL;?>/assets/" id="assets">
 

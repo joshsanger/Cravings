@@ -1,3 +1,36 @@
+.hide {
+    display: none !important;
+}
+.no-items,
+.fetching-items {
+    padding: 20px;
+    color: lighten(@greyDark, 20%);
+    .flex-container();
+    .align-items(center);
+    .justify-content(center);
+    width: 100%;
+    text-align: center;
+    & p {
+        font-size: 14px;
+    }
+    & .spinner {
+        margin-right: 15px;
+        .flex(0 0 auto);
+    }
+    & .faux-link {
+        color: @purple;
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+    & i {
+        .flex(0 0 auto);
+        font-size: 40px;
+        margin-right: 15px;
+        color: lighten(@greyDark, 40%);
+    }
+}
 .main-error {
     position: fixed;
     width: 800px;
