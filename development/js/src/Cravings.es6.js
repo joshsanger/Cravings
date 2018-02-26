@@ -21,11 +21,11 @@ export default class Cravings {
         this.ajaxPath      = $('#path').val();
         this.mainError     = $('.main-error');
         this.mainOverlay   = $('.main-overlay');
+        this.fetchCravings = this.fetchCravings.bind(this);
         this.errorInterval = '';
 
         if (!!user) {
             this.user = user;
-            this.fetchCravings = this.fetchCravings.bind(this);
             this.fetchCravings();
         } else {
             $.ajax({
@@ -39,9 +39,9 @@ export default class Cravings {
                 success   : (response) => {
                     localStorage.setItem('user', response.id);
                     this.user = response.id;
-
-
-                    this.fetchCravings();
+                    $('.no-items').removeClass('hide');
+                    $('#items-wrap').addClass('hide');
+                    $('.fetching-items').addClass('hide');
                 }
             });
         }
@@ -80,6 +80,8 @@ export default class Cravings {
                         response.url = theURL;
                         theInput.val('').trigger('input');
                         $('#items-wrap').prepend(this.buildItemMarkup(response));
+                        $('#items-wrap').removeClass('hide');
+                        $('.no-items').addClass('hide');
                     } else {
                         this.mainError.find('p').text(response.error);
                         this.mainError.addClass('show');
@@ -187,7 +189,8 @@ export default class Cravings {
      */
     fetchCravings() {
 
-        var formData = {user: this.user};
+        const formData = {user: this.user};
+        let markup     = '';
 
         $.ajax({
             type      : "POST",
@@ -200,9 +203,19 @@ export default class Cravings {
             success   : (response) => {
                 $('.fetching-items').addClass('hide');
                 this.mainOverlay.hide();
-                console.log(response);
 
-                // check if there are entries
+                if (response.cravings.length) {
+
+                    for (let cravings of response.cravings) {
+                        markup += buildItemMarkup(cravings);
+                    }
+                    $('#items-wrap').prepend(markup);
+                    $('#items-wrap').removeClass('hide');
+                } else {
+
+                    $('.no-items').removeClass('hide');
+                    $('#items-wrap').addClass('hide');
+                }
             }
         });
     }
