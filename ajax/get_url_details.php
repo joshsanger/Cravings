@@ -11,7 +11,7 @@ try {
 
 
     if (!filter_var($url, FILTER_VALIDATE_URL)) {
-        throw new Exception('Aw dang, please enter a valid URL!.');
+        throw new Exception('Aw dang, please enter a valid URL!');
     }
 
     $info = Embed::create($url);

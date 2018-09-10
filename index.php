@@ -15,12 +15,20 @@
             </div>
             <button id="add-url" disabled><i class="far fa-plus"></i> <span>Add</span></button>
         </div>
+        <div class="main-error">
+            <div>
+                <div>
+                    <i class="far fa-exclamation-triangle"></i>
+                    <p>Oops. Something went wrong.</p>
+                </div>
+            </div>
+        </div> <!-- /error -->
     </div>
 </section>
 
 <section class="no-items hide">
     <i class="far fa-info-circle"></i>
-    <p>Hm, it looks like there aren't any cravings yet. <span class="faux-link" id="focus-on-field">Try adding some</span>!</p>
+    <p>Hm, it looks like there aren't any cravings yet. <label for="url-input" class="faux-link">Try adding some</label>!</p>
 </section> <!-- /no-items -->
 <section class="fetching-items">
     <div class="spinner slow">

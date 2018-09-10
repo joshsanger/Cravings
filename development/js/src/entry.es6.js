@@ -37,7 +37,12 @@ $(document).ready(function() {
         if (e.keyCode === 13 && $('#url-input').val().trim().length) {
             $('#add-url').trigger('click');
         }
-    })
+    });
+    $('#url-input').on('input paste', function() {
+        console.log('hi');
+        $('#add-url').prop('disabled', !($(this).val().trim().length));
+    });
+
     $('#add-url').on('click', function() {
         cravings.getUrlDetails($('#url-input'));
     });
