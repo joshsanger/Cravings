@@ -23,27 +23,30 @@ export default class Cravings {
         this.mainOverlay   = $('.main-overlay');
         this.fetchCravings = this.fetchCravings.bind(this);
         this.errorInterval = '';
+        this.cravings      = (JSON.parse(localStorage.getItem('cravings')) || []);
+
+        console.log(this.cravings);
 
         if (!!user) {
-            this.user = user;
-            this.fetchCravings();
+            // this.user = user;
+            // this.fetchCravings();
         } else {
-            $.ajax({
-                type      : "POST",
-                url       : this.ajaxPath + 'set-user-id.php',
-                data      : {},
-                dataType  : "json",
-                beforeSend: () => {
-
-                },
-                success   : (response) => {
-                    localStorage.setItem('user', response.id);
-                    this.user = response.id;
-                    $('.no-items').removeClass('hide');
-                    $('#items-wrap').addClass('hide');
-                    $('.fetching-items').addClass('hide');
-                }
-            });
+            // $.ajax({
+            //     type      : "POST",
+            //     url       : this.ajaxPath + 'set-user-id.php',
+            //     data      : {},
+            //     dataType  : "json",
+            //     beforeSend: () => {
+            //
+            //     },
+            //     success   : (response) => {
+            //         localStorage.setItem('user', response.id);
+            //         this.user = response.id;
+            //         $('.no-items').removeClass('hide');
+            //         $('#items-wrap').addClass('hide');
+            //         $('.fetching-items').addClass('hide');
+            //     }
+            // });
         }
     }
 
@@ -75,11 +78,13 @@ export default class Cravings {
                 success   : (response) => {
                     $('.spinner, .spinner-overlay').fadeOut(400);
 
+                    console.log(response);
+
                     if (!response.error) {
 
-                        response.url = theURL;
+                        // response.url = theURL;
                         theInput.val('').trigger('input');
-                        $('#items-wrap').prepend(this.buildItemMarkup(response));
+                        $('#cravings-wrapper').prepend(this.buildItemMarkup(response.data));
                         $('#items-wrap').removeClass('hide');
                         $('.no-items').addClass('hide');
                     } else {
@@ -97,38 +102,40 @@ export default class Cravings {
      * 01.02. BUILD ITEM MARKUP
      * Builds the item markup
      *
-     * @param       theObj      object      The object containing
+     * @param       obj      object      The object containing
      *
      * @return      theMarkup   string      The markup
      */
-    buildItemMarkup(theObj = {}) {
+    buildItemMarkup(obj = {}) {
 
         let theMarkup = '';
-        let hasImage = true;
-
-        if (!theObj.hasOwnProperty('description') || !theObj.description) {
-            theObj.description = `No description available, but I bet it's delicious! You should definitely post more yummy things!`;
+        let image     = false;
+        
+        for (let i of obj.images) {
+            if (i.width >= 300) {
+                image = i;
+                break;
+            }
         }
 
-        if (!theObj.hasOwnProperty('image') || !theObj.image) {
-
-            theObj.image = '';
-            hasImage = false;
-        }
-
+        // check if description
         theMarkup = (`
-            <div class="item" data-id="${theObj.id}" id="item${theObj.id}">
-                <a href="${theObj.url}" target="_blank" class="image ${(!hasImage ? 'no-image' : '')}">
-                    ${(hasImage ? `<img src="${theObj.image}"/>` : '')}
-                </a>
-                <div class="text">
-                    <h2><a href="${theObj.url}" target="_blank">${(theObj.title || 'Something delicious')}</a></h2>
-                    <p>${theObj.description}</p>
+            <div class="craving" ${(!!image ? `style="background-image: url(${image.url});"` : '')}>
+                <a href="${obj.url}"></a>
+                <div>
+                    <div>
+                        <div class="actions">
+                            <a href="#"><i class="far fa-external-link"></i></a>
+                            <span><i class="far fa-info-circle"></i></span>
+                            <span><i class="far fa-trash"></i></span>
+                        </div>
+                    </div>
+        
+                    <div class="title">
+                        <a href="${obj.url}" target="_blank">${(obj.title || 'Something delicious, I\'m sure!')}</a>
+                    </div>
                 </div>
-                <div class="controls">
-                    <span class="remove"><i class="material-icons">&#xE872;</i> Remove</span>
-                </div>
-            </div>            
+            </div>
         `);
 
         return theMarkup;

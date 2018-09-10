@@ -1,79 +1,45 @@
 <?php
 
-include_once('../src/OpenGraph/OpenGraph.php');
-include_once('../_includes/database.php');
+require_once('../vendor/autoload.php');
+use Embed\Embed;
 
 $response;
-$graph;
-$url = $_POST['url'] ?? '';
-$user = $_POST['user'] ? intval($_POST['user']) : '';
+$info = false;
+$url = $_POST['url'] ? $_POST['url'] : '';
 
 try {
 
-    $db = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (mysqli_connect_errno()) {
-        throw new Exception('Failed to connect to MySQL: ' . mysqli_connect_error());
-    }
 
     if (!filter_var($url, FILTER_VALIDATE_URL)) {
-        throw new Exception('Please enter a valid URL');
+        throw new Exception('Aw dang, please enter a valid URL!.');
     }
 
-    if (empty($user)) {
-        throw new Exception('No user was passed');
-    }
+    $info = Embed::create($url);
 
-    $graph = OpenGraph::fetch($url);
-    if ($graph === false) {
-        throw new Exception('Could not retrieve page info.');
+    if (!$info) {
+        throw new Exception('Oh snap, Could not retrieve page info! Please try another url.');
     }
 
     if (!isset($e)) {
 
-        $title = $graph->__get('title');
-        $description = $graph->__get('description');
-        $image = (!empty($graph->__get('image')) ? $graph->__get('image') : '');
-
-
-        // check if URL exists
-        $handle = curl_init($image);
-        curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
-        $curlResponse = curl_exec($handle);
-        $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-
-        if ($httpCode !== 200) {
-            $image = '';
-        }
-
-        curl_close($handle);
-
-
-        $query = $db->prepare(" INSERT INTO
-					 urls (user, url,title,description,image_url)
-				   VALUES (?,?,?,?,?)");
-        $query->bind_param('sssss', $user, $url,$title,$description,$image);
-        $query->execute();
-
-        if (!$query) {
-            throw new Exception('Database Error!');
-        }
-
-        $response['id']          = mysqli_insert_id($db);
-        $response['title']       = $title;
-        $response['description'] = $description;
-        $response['image']       = $image;
-
+        $response['data']['title'] = $info->title;
+        $response['data']['description'] = $info->description;
+        $response['data']['url'] = $info->url;
+        $response['data']['image']['url'] = $info->image;
+        $response['data']['image']['width'] = $info->imageWidth;
+        $response['data']['image']['height'] = $info->imageHeight;
+        $response['data']['images'] = $info->images;
     }
 } catch (Exception $e){
     $response['error'] = $e->getMessage();
-
-
 } catch (\Exception $e) {
-    $db->rollbackTransaction();
+    $response['error'] = $e->getMessage();
+} catch (\Throwable $e) {
+    $response['error'] = $e->getMessage();
 } finally {
     usleep(500000);
     echo json_encode($response);
 }
+
 
 

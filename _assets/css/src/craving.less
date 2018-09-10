@@ -1,0 +1,89 @@
+@darkBlue: #393b41;
+#cravings-wrapper {
+    .flex-container(row, wrap);
+}
+.craving {
+    margin: 20px;
+    min-height: 300px;
+    width: 400px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    background: url(../images/default.jpg) no-repeat center center /cover;
+    .flex-container(row, wrap);
+    .align-items(flex-end);
+    .justify-content(flex-end);
+    position: relative;
+    & > a {
+        position: absolute;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        &.has-image {
+            background: @blueDark no-repeat center center /cover;
+        }
+    }
+    & > div {
+        width: 100%;
+        position: relative;
+        z-index: 2;
+        text-align: right;
+        & > div {
+            &:first-child {
+                display: inline-block;
+            }
+        }
+    }
+    & .title {
+        text-align: left;
+        width: 100%;
+        color: @darkBlue;
+        font-weight: 600;
+        background: @white;
+        font-size: 14px;
+        line-height: 1.5em;
+        width: 100%;
+        .flex(0 0 auto);
+        display: block;
+        & a {
+            padding: 20px;
+            color: @darkBlue;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            .trans(color, 0.3s);
+            &:hover {
+                color: lighten(@darkBlue, 30%);
+            }
+        }
+    }
+    & .actions {
+        background: @white;
+        padding: 5px;
+        display: inline-block;
+        .flex-container();
+        .align-items(center);
+        & > * {
+            cursor: pointer;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            .flex-container();
+            .align-items(center);
+            .justify-content(center);
+            .trans(all, 0.3s);
+            text-decoration: none;
+            background: transparent;
+            &:hover {
+                background: #f5f5f5;
+            }
+            & + * {
+                margin-left: 10px;
+            }
+            & i {
+                color: @darkBlue;
+                font-size: 14px;
+            }
+        }
+    }
+}
