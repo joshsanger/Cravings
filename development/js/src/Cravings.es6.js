@@ -25,6 +25,13 @@ export default class Cravings {
         this.errorInterval = '';
         this.cravings      = (JSON.parse(localStorage.getItem('cravings')) || []);
 
+        $('.fetching-items').addClass('hide');
+        if (this.cravings.length) {
+
+        } else {
+            $('.no-items').removeClass('hide');
+        }
+
         console.log(this.cravings);
 
         if (!!user) {
@@ -126,7 +133,6 @@ export default class Cravings {
                     <div>
                         <div class="actions">
                             <a href="#"><i class="far fa-external-link"></i></a>
-                            <span><i class="far fa-info-circle"></i></span>
                             <span><i class="far fa-trash"></i></span>
                         </div>
                     </div>
