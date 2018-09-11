@@ -2,6 +2,7 @@
 #cravings-wrapper {
     .flex-container(row, wrap);
     .justify-content(center);
+    padding: 20px 0px;
 }
 .craving {
     margin: 20px;
@@ -94,5 +95,10 @@
                 font-size: 14px;
             }
         }
+    }
+}
+@media screen and (max-width: 720px) {
+    #cravings-wrapper {
+        padding: 0;
     }
 }
