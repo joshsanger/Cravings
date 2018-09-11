@@ -25,10 +25,12 @@
         </div> <!-- /error -->
     </div>
 </section>
+
 <section class="no-items hide">
     <i class="far fa-info-circle"></i>
     <p>Hm, it looks like there aren't any cravings yet. <label for="url-input" class="faux-link">Try adding some</label>!</p>
 </section> <!-- /no-items -->
+
 <section class="fetching-items">
     <div class="spinner slow">
         <div class="double-bounce1"></div>
@@ -36,9 +38,9 @@
     </div>
     <p>Hang on a quick sec, grabbing all your delicious cravings!</p>
 </section> <!-- /no-items -->
-<dection id="cravings-wrapper" class="hide">
+<section id="cravings-wrapper" class="hide">
 
-</dection>
+</section>
 <input type="hidden" value="<?php echo BASE_URL;?>/ajax/" id="path">
 <input type="hidden" value="<?php echo BASE_URL;?>/assets/" id="assets">
 

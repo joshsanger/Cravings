@@ -1,10 +1,10 @@
-# Rebecca's Cravings
+#Rebecca's Cravings
 This project was created to allow my wife to let me know what she was craving throughout her pregnancy with our son, Linus. We eventually decided to just use Pinterest, but this was still a fun project!
 
 [View demo](http://joshuasanger.ca/cravings) 
 
 
-## Features
+##Features
 * Add URLs of recipes, restaurant menu items, take out, or pretty much aything on the internet
 * Using the Embed composer library found [here](https://packagist.org/packages/embed/embed), I get the information from the page, and find the best image to set as the thumbnail image
 * The craving is then saved to local storage for later viewing (back when it was just for my wife and I, a database was being used and and email notification would be sent to myself)
