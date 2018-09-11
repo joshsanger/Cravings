@@ -1,7 +1,7 @@
 /**
  * T A B L E   O F   C O N T E N T S
  *
- * @author      Geek Power Web Design
+ * @author      Joshua Sanger
  * @version     1.0
  *
  * 01.    CLASS SET UP
@@ -14,12 +14,6 @@
  */
 
 
-/**
- * 01. CLASS SET UP
- * Sets up the class
- *
- * @param       user        string      The user id based on local storage
- */
 export default class Cravings {
 
 
@@ -86,7 +80,6 @@ export default class Cravings {
                     $('.spinner, .spinner-overlay').fadeOut(400);
                     if (!response.error) {
 
-                        // response.url = theURL;
                         theInput.val('').trigger('input');
                         $('#cravings-wrapper').prepend(this.build_cravingMarkup(response.data));
                         $('#cravings-wrapper').removeClass('hide');
@@ -108,13 +101,13 @@ export default class Cravings {
                         theInput.focus();
                         this.mainError.find('p').text(response.error);
                         this.mainError.addClass('show');
-                        this.errorInterval = setInterval(this.hideError.bind(this), 4000);
+                        this.errorInterval = setInterval(this.hide_error.bind(this), 4000);
                     }
                 },
                 error    : () => {
                     this.mainError.find('p').text('Oh shoot, something went wrong. Try again later.');
                     this.mainError.addClass('show');
-                    this.errorInterval = setInterval(this.hideError.bind(this), 4000);
+                    this.errorInterval = setInterval(this.hide_error.bind(this), 4000);
                     $('.spinner, .spinner-overlay').fadeOut(400);
                     theInput.focus();
                 }
@@ -136,7 +129,6 @@ export default class Cravings {
         let theMarkup = '';
         let image     = this.get_previewImage((obj.images || []));
 
-        // check if description
         theMarkup = (`
             <div class="craving" ${(!!image ? `style="background-image: url(${image.url});"` : '')} data-id="cravings-${obj.id}">
                 <a href="${obj.url}" target="_blank"></a>
@@ -163,7 +155,7 @@ export default class Cravings {
      * 01.03. HIDE ERROR
      * Hides the error
      */
-    hideError() {
+    hide_error() {
 
         this.mainError.removeClass('show');
         clearInterval(this.errorInterval);
@@ -242,7 +234,4 @@ export default class Cravings {
 
         return image;
     }
-
-
-
 }
