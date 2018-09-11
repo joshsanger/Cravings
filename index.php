@@ -35,7 +35,7 @@
         <div class="double-bounce1"></div>
         <div class="double-bounce2"></div>
     </div>
-    <p>Hang on a quick sec, collecting your cravings. Thank you for your patience.</p>
+    <p>Hang on a quick sec, grabbing all your delicious cravings!</p>
 </section> <!-- /no-items -->
 <dection id="cravings-wrapper">
 

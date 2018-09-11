@@ -39,7 +39,6 @@ $(document).ready(function() {
         }
     });
     $('#url-input').on('input paste', function() {
-        console.log('hi');
         $('#add-url').prop('disabled', !($(this).val().trim().length));
     });
 
