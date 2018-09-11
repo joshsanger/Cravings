@@ -25,7 +25,6 @@
         </div> <!-- /error -->
     </div>
 </section>
-
 <section class="no-items hide">
     <i class="far fa-info-circle"></i>
     <p>Hm, it looks like there aren't any cravings yet. <label for="url-input" class="faux-link">Try adding some</label>!</p>
