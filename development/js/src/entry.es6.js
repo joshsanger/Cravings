@@ -47,6 +47,6 @@ $(document).ready(function() {
     });
 
     $('body').on('click', '.remove', function() {
-        cravings.removeItem($(this).parents('.item').attr('data-id'));
+        cravings.remove_item($(this).parents('.craving'));
     });
 });

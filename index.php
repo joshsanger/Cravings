@@ -37,7 +37,7 @@
     </div>
     <p>Hang on a quick sec, grabbing all your delicious cravings!</p>
 </section> <!-- /no-items -->
-<dection id="cravings-wrapper">
+<dection id="cravings-wrapper" class="hide">
 
 </dection>
 <input type="hidden" value="<?php echo BASE_URL;?>/ajax/" id="path">

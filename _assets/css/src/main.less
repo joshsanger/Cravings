@@ -195,5 +195,85 @@
         font-size: 23px;
         font-weight: 500;
     }
+}
 
+@media screen and (max-width: 680px) {
+    #top {
+        padding: 100px 0;
+        & h1 {
+            font-size: 18px;
+        }
+    }
+    #input-wrap {
+        position: relative;
+        z-index: 2;
+        border-radius: 6px;
+        background: @white;
+        width: 100%;
+        .flex-container();
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        & > div {
+            padding-left: 15px;
+            .flex(1);
+            height: 100%;
+            position: relative;
+            .flex-container();
+            .align-items(center);
+
+        }
+        & input {
+            border: none;
+            .trans(border-color, 0.15s);
+            box-shadow: none;
+            -webkit-appearance: none;
+            padding: 15px 15px 15px 10px;
+            width: 100%;
+            outline: none;
+            color: @blueDark;
+            border-radius: 0;
+            font-size: 12px;
+            .flex-order(2);
+            &:focus {
+                box-shadow: none;
+                & + span {
+                    &::after {
+                        .transform(~"translate3d(0px, 0, 0)");
+                        .trans(all, 0.3s);
+                    }
+                    & i {
+                        .trans(all, 0.3s, 0.15s);
+                        color: @green;
+                    }
+                }
+            }
+            & + span {
+                .flex-order(1);
+                &::after {
+                    .trans(all, 0.3s, 0.15s);
+                    position: absolute;
+                    content: '';
+                    height: 100%;
+                    width: 6px;
+                    background: @green;
+                    left: 0;
+                    top: 0;
+                    .transform(~"translate3d(-6px, 0, 0)");
+                }
+                & i {
+                    .trans(all, 0.3s);
+                    color: @greyMed;
+                    font-size: 14px;
+                }
+            }
+
+        }
+        & button {
+            width: 90px;
+            font-size: 11px;
+            & i {
+                font-size: 12px;
+            }
+        }
+    }
 }

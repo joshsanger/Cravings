@@ -4,7 +4,13 @@
  * @author      Geek Power Web Design
  * @version     1.0
  *
- * 01. CLASS SET UP
+ * 01.    CLASS SET UP
+ * 01.01. GET URL DETAILS
+ * 01.02. BUILD CRAVING MARKUP
+ * 01.03. HIDE ERROR
+ * 01.04. REMOVE ITEM
+ * 01.05. FETCH CRAVINGS
+ * 01.06. GET PREVIEW IMAGE
  */
 
 
@@ -42,16 +48,26 @@ export default class Cravings {
     }
 
     /**
-     * 01.01. GET URL DEATILS
+     * 01.01. GET URL DETAILS
      * Gets the details of the url that was entered
      */
     getUrlDetails(theInput = $('#url-input')) {
 
-        const theURL = theInput.val().trim();
+        let theURL = theInput.val().trim();
         let formData = {};
 
 
         if (theURL.length) {
+
+            if (theURL.indexOf('http') == -1) {
+                if (theURL.indexOf('www.') == -1) {
+                    theURL = 'http://www.' + theURL;
+                } else {
+                    theURL = 'http://' + theURL;
+                }
+                theInput.val(theURL);
+            }
+
 
             formData.url  = theURL;
             formData.user = parseFloat(this.user);
@@ -73,16 +89,17 @@ export default class Cravings {
 
                         // response.url = theURL;
                         theInput.val('').trigger('input');
-                        $('#cravings-wrapper').prepend(this.buildItemMarkup(response.data));
-                        $('#items-wrap').removeClass('hide');
+                        $('#cravings-wrapper').prepend(this.build_cravingMarkup(response.data));
+                        $('#cravings-wrapper').removeClass('hide');
                         $('.no-items').addClass('hide');
 
 
                         this.cravings[this.cravingsArrayLength] = {
                             id         : this.cravingsArrayLength,
                             title      : response.data.title,
-                            description: response.data.title,
-                            images     : response.data.images
+                            description: response.data.description,
+                            images     : response.data.images,
+                            url        : response.data.url
                         };
 
                         this.cravingsArrayLength++;
@@ -106,27 +123,27 @@ export default class Cravings {
 
 
     /**
-     * 01.02. BUILD ITEM MARKUP
-     * Builds the item markup
+     * 01.02. BUILD CRAVING MARKUP
+     * Builds the craving markup
      *
      * @param       obj      object      The object containing
      *
      * @return      theMarkup   string      The markup
      */
-    buildItemMarkup(obj = {}) {
+    build_cravingMarkup(obj = {}) {
 
         let theMarkup = '';
         let image     = this.get_previewImage((obj.images || []));
 
         // check if description
         theMarkup = (`
-            <div class="craving" ${(!!image ? `style="background-image: url(${image.url});"` : '')} id="cravings-${obj.id}">
-                <a href="${obj.url}"></a>
+            <div class="craving" ${(!!image ? `style="background-image: url(${image.url});"` : '')} data-id="cravings-${obj.id}">
+                <a href="${obj.url}" target="_blank"></a>
                 <div>
                     <div>
                         <div class="actions">
                             <a href="#"><i class="far fa-external-link"></i></a>
-                            <span><i class="far fa-trash"></i></span>
+                            <span class="remove"><i class="far fa-trash"></i></span>
                         </div>
                     </div>
         
@@ -153,13 +170,31 @@ export default class Cravings {
 
 
     /**
-     * 01.04.REMOVE ITEM
+     * 01.04. REMOVE ITEM
      * Removes the item from the database
      *
-     * @param       id      string      The id of the url entry
+     * @param       craving     element     The craving that is being removed
      */
-    removeItem(id) {
+    remove_item(craving) {
 
+        const id = craving.attr('data-id').split('-')[1];
+
+        $('.spinner, .spinner-overlay').fadeIn(400);
+
+        setTimeout(() => {
+
+            craving.remove();
+            delete this.cravings[id];
+            this.cravingsArrayLength--;
+            localStorage.setItem('cravings', JSON.stringify(this.cravings));
+            $('.spinner, .spinner-overlay').fadeOut(400);
+
+            if (!this.cravingsArrayLength) {
+                $('#cravings-wrapper').addClass('hide');
+                $('.no-items').removeClass('hide');
+            }
+
+        }, (Math.ceil(Math.random() * 4) * 500)); // faux loading
 
     }
 
@@ -174,7 +209,7 @@ export default class Cravings {
         const cravingsWrapper = $('#cravings-wrapper');
 
         for (let craving in this.cravings) {
-            markup += this.buildItemMarkup(this.cravings[craving]);
+            markup = this.build_cravingMarkup(this.cravings[craving]) + markup;
         }
 
         cravingsWrapper.prepend(markup);
