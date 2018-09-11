@@ -5,7 +5,7 @@
 
 <section id="top">
     <div class="container">
-        <h1>What are you craving, Rebecca?</h1>
+        <h1>What are you craving?</h1>
         <div id="input-wrap">
             <div>
                 <input type="text" id="url-input" placeholder="Enter or paste the URL"/>
