@@ -142,7 +142,7 @@ export default class Cravings {
                 <div>
                     <div>
                         <div class="actions">
-                            <a href="#"><i class="far fa-external-link"></i></a>
+                            <a href="${obj.url}" target="_blank"><i class="far fa-external-link"></i></a>
                             <span class="remove"><i class="far fa-trash"></i></span>
                         </div>
                     </div>
