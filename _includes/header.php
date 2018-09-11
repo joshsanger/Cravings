@@ -13,7 +13,7 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-config" content="_assets/favicons/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
-        <title>Rebecca's Cravings</title>
+        <title>What are you craving?</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
