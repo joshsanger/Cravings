@@ -43,7 +43,7 @@ $(document).ready(function() {
     });
 
     $('#add-url').on('click', function() {
-        cravings.getUrlDetails($('#url-input'));
+        cravings.get_urlDetails($('#url-input'));
     });
 
     $('body').on('click', '.remove', function() {

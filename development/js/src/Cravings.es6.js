@@ -51,7 +51,7 @@ export default class Cravings {
      * 01.01. GET URL DETAILS
      * Gets the details of the url that was entered
      */
-    getUrlDetails(theInput = $('#url-input')) {
+    get_urlDetails(theInput = $('#url-input')) {
 
         let theURL = theInput.val().trim();
         let formData = {};
@@ -68,9 +68,7 @@ export default class Cravings {
                 theInput.val(theURL);
             }
 
-
             formData.url  = theURL;
-            formData.user = parseFloat(this.user);
 
             $.ajax({
                 type      : "POST",
@@ -81,6 +79,7 @@ export default class Cravings {
                     $('.spinner, .spinner-overlay').fadeIn(400);
                     clearInterval(this.errorInterval);
                     this.mainError.removeClass('show');
+                    document.activeElement.blur();
                 },
                 success   : (response) => {
 
@@ -106,6 +105,7 @@ export default class Cravings {
                         localStorage.setItem('cravings', JSON.stringify(this.cravings));
 
                     } else {
+                        theInput.focus();
                         this.mainError.find('p').text(response.error);
                         this.mainError.addClass('show');
                         this.errorInterval = setInterval(this.hideError.bind(this), 4000);
@@ -116,6 +116,7 @@ export default class Cravings {
                     this.mainError.addClass('show');
                     this.errorInterval = setInterval(this.hideError.bind(this), 4000);
                     $('.spinner, .spinner-overlay').fadeOut(400);
+                    theInput.focus();
                 }
             });
         }
