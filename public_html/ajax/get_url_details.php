@@ -1,11 +1,12 @@
 <?php
 
-require_once('../vendor/autoload.php');
+require_once('../../vendor/autoload.php');
 use Embed\Embed;
 
-$response;
+$response = array();
 $info = false;
-$url = $_POST['url'] ? $_POST['url'] : '';
+$data = json_decode(file_get_contents('php://input'));
+$url = $data->url ? $data->url : '';
 
 try {
 
