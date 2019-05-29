@@ -2,24 +2,27 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Top from "./Top";
 import * as actionTypes from "../store/actions";
+import NoResults from "./NoResults";
+import Cravings from "./Cravings";
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            url: ''
-        };
 
-        const cravings = (JSON.parse(localStorage.getItem('cravings')) || {});
+        const cravings = (JSON.parse(localStorage.getItem('cravings')) || []);
         this.props.updateCravings(cravings);
-
-
     }
+
+
     render() {
+
+
         return (
             <div>
                 <Top />
+                {!this.props.cravings.length && <NoResults />}
+                {!!this.props.cravings.length && <Cravings />}
             </div>
         );
     }
@@ -28,16 +31,16 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-
+        cravings: state.cravings
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateCravings: payload => {
+        updateCravings: payload => dispatch({
             type: actionTypes.UPDATE_CRAVINGS,
-                payload
-        }
+            payload
+        })
     };
 };
 
