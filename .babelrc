@@ -7,6 +7,7 @@
 	"plugins": [
 		"transform-class-properties",
 		"transform-builtin-extend",
-		"transform-eval"
+		"transform-eval",
+		"transform-object-rest-spread"
 	]
 }
