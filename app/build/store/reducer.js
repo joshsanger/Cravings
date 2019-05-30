@@ -18,6 +18,14 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 cravings: action.payload
             }
+        case actionTypes.REMOVE_CRAVING:
+
+            const cravings = state.cravings.filter((craving) => (craving.id != action.payload));
+            localStorage.setItem('cravings', JSON.stringify(cravings));
+            return {
+                ...state,
+                cravings
+            }
         default:
             return state;
     }
