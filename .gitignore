@@ -2,11 +2,7 @@
 /_includes/config.php
 /_includes/database.php
 /working_files/
-/_assets/css/staging.less
-/_assets/css/master.min.css
-/_assets/js/main.min.js
+/assets/js/main.min.js
 /node_modules/
 /vendor/
-/development/js/es6-compiled.js
 /public_html/assets/js/main.js
-/old
