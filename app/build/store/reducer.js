@@ -3,7 +3,8 @@ import * as actionTypes from './actions.js'
 const initialState = {
     url           : '',
     submitDisabled: true,
-    cravings      : []
+    cravings      : [],
+    fetching      : false
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +26,19 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 cravings
+            }
+        case actionTypes.ADD_CRAVING:
+
+            const updatedCravings = [action.payload].concat(state.cravings);
+            localStorage.setItem('cravings', JSON.stringify(updatedCravings));
+            return {
+                ...state,
+                cravings: updatedCravings
+            }
+        case actionTypes.SET_FETCHING:
+            return {
+                ...state,
+                fetching: action.payload
             }
         default:
             return state;

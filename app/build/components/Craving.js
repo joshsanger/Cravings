@@ -42,8 +42,10 @@ class Craving extends Component {
 
         let image = this.get_previewImage((this.props.craving.images || []));
 
+        console.log(image);
+
         return (
-            <div className="craving" style={(!!image ? {backgroundImage: `url(${image.url})`} : '')}>
+            <div className="craving" style={{backgroundImage: (!!image ? `url(${image.url})` : '')}}>
                 <a href={this.props.craving.url} target="_blank"></a>
                 <div>
                     <div>

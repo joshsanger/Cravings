@@ -23,6 +23,16 @@ class App extends Component {
                 <Top />
                 {!this.props.cravings.length && <NoResults />}
                 {!!this.props.cravings.length && <Cravings />}
+                {!!this.props.fetching && (
+                    <div>
+                        <div className="main-overlay"></div>
+                        <div className="spinner-overlay"></div>
+                        <div className="spinner fixed">
+                            <div className="double-bounce1"></div>
+                            <div className="double-bounce2"></div>
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }
@@ -31,6 +41,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        fetching: state.fetching,
         cravings: state.cravings
     };
 };
