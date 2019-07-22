@@ -9,16 +9,6 @@ class Craving extends Component {
         this.handleRemove = this.handleRemove.bind(this);
     }
 
-
-    /**
-     * 01.06. GET PREVIEW IMAGE
-     * Loops through all returned images and returns one that matches the desired size
-     *
-     * @param       images      array       The images to loop through
-     * @param       size        integer     The desired image size
-     *
-     * @return      image       object      The image that meets the size. If none found, will be false
-     */
     get_previewImage = (images = [], size = 400) => {
 
         let image = false;
@@ -31,12 +21,11 @@ class Craving extends Component {
         }
 
         return image;
-    };
+    }
 
     handleRemove() {
         this.props.removeCraving(this.props.craving.id);
-    };
-
+    }
 
     render() {
 
@@ -62,7 +51,7 @@ class Craving extends Component {
             </div>
         );
     }
-};
+}
 
 const mapDispatchToProps = dispatch => {
     return {

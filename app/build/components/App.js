@@ -8,15 +8,14 @@ import Cravings from "./Cravings";
 class App extends Component {
 
     constructor(props) {
+
         super(props);
 
         const cravings = (JSON.parse(localStorage.getItem('cravings')) || []);
         this.props.updateCravings(cravings);
     }
 
-
     render() {
-
 
         return (
             <div>

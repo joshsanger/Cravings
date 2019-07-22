@@ -6,16 +6,16 @@ import * as actionTypes from "../store/actions";
 class Top extends Component {
 
     constructor(props) {
+
         super(props);
 
-        this.state = {
-            hasError: false,
-            error: false
-        };
         this.interval = false;
-        this.input = React.createRef();
+        this.input    = React.createRef();
+        this.state    = {
+            hasError: false,
+            error   : false
+        };
     }
-
 
     handleSubmit = (e) => {
 
@@ -31,9 +31,6 @@ class Top extends Component {
             }
         }
 
-        // $('.spinner, .spinner-overlay').fadeIn(400);
-        // clearInterval(this.errorInterval);
-        // this.mainError.removeClass('show');
         document.activeElement.blur();
         this.setState({
             hasError: false
@@ -98,8 +95,6 @@ class Top extends Component {
     handleUrlChange = (e) => {
         this.props.inputUrl(e.target.value);
     }
-
-
 
     render() {
         return (
